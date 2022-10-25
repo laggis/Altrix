@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+h1 { font-family: 'Ubuntu', sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: 'Ubuntu', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: 'Ubuntu', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: 'Ubuntu', sans-serif; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: 'Ubuntu', sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+
+body, html {
+	font-family: 'Ubuntu', sans-serif;
+	overflow-y: hidden;
+}
+
+#admin {
+	font-family: 'Ubuntu', sans-serif;
+	border-top: 5px solid white;
+	font-family: 'Ubuntu', sans-serif;
+	height: 555px;
+	background: #ffa44ea0;
+	color: white;
+	width: 880px;
+	position: absolute;
+	top: 50%;
+	left: 47%;
+	margin-top: -350px;
+	margin-left: -400px;
+	padding-bottom: 20px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+#activeuser {
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: -1.5%;
+	color: rgba(0, 0, 0, 0.842);
+	font-weight: 500;
+}
+
+#header2 {
+	font-family: 'Ubuntu', sans-serif;
+	color: rgba(255, 255, 255, 0.527);
+	position: absolute;
+	text-transform: uppercase;
+	margin-top: 7px;
+	font-weight: 500;
+	font-size: 28px;
+}
+
+#header3 {
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 2%;
+	position: absolute;
+	font-size: 13px;
+	font-weight: 200;
+	text-transform: uppercase;
+}
+
+#main {
+	font-family: 'Ubuntu', sans-serif;
+	height: 640px;
+}
+
+#tabs {
+	font-family: 'Ubuntu', sans-serif;
+	height: 30px;
+}
+
+.tab {
+	font-family: 'Ubuntu', sans-serif;
+	width: 100px;
+	height: 30px;
+	float: left;
+	border: none;
+	font-weight: 50;
+	color: rgba(255, 255, 255, 0.514);
+	margin-left: 5px;
+	background: #ffa44ea0;
+	border-radius: 5px;
+}
+
+.tab.selected {
+	font-family: 'Ubuntu', sans-serif;
+	background: #ffa44ea0;
+	border-radius: 5px;
+}
+
+#list {
+	font-family: 'Ubuntu', sans-serif;
+	display: inline-block;
+	margin-bottom: 100px;
+	width: 300px;
+	height: 470px;
+	overflow-x: hidden;
+}
+
+#selected h3 {
+	font-family: 'Ubuntu', sans-serif;
+	margin-left: 15px;
+	font-weight: 100;
+	font-size: 15px;
+}
+
+.quick {
+	font-family: 'Ubuntu', sans-serif;
+	margin-left: 1px;
+	width: 30%;
+	background: rgb(255, 255, 255);
+	border: none;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-top: 5px;
+	color: rgba(32, 32, 32, 0.588);
+	border-radius: 2px;
+	font-size: 12px;
+}
+
+.group_set {
+	font-family: 'Ubuntu', sans-serif;
+	color: #ffffff;
+	font-size: 12px;
+	display: inline-block;
+	float: left;
+	padding: 10px;
+	width: 260px;
+
+	outline: 0;
+	border: 0;
+	border-left: 2px solid white;
+	background-color: rgba(50, 52, 61, 0.836);
+
+	transition: background-color .5s;
+}
+
+button {
+	font-family: 'Ubuntu', sans-serif;
+	transition: background-color .5s;
+} 
+
+button:hover {
+	font-family: 'Ubuntu', sans-serif;
+	background: #914EFFA0;
+
+}
+
+.group_set:hover {
+	font-family: 'Ubuntu', sans-serif;
+	border-left: 2px solid #ff8800;
+}
+
+.group_set button {
+	font-family: 'Ubuntu', sans-serif;
+	transition: background .5s;
+	margin-top: 5px;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-radius: 5px;
+	height: 35px;
+	border: none;
+	width: 100%;
+	margin-top: 3px;
+	padding-top: 3px;
+	font-size: 12px;
+	padding-bottom: 5px;
+	background: rgba(50, 52, 61, 0.836);
+	color: #ffffff96;
+	font-weight: 100;
+	border: 0;
+	outline: 0;
+}
+
+.group_set input {
+	font-family: 'Ubuntu', sans-serif;
+	transition: background .5s;
+	margin-top: 5px;
+	width: 100%;
+	height: 30px;
+	text-indent: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border: 0;
+	outline: 0;
+	background: rgba(50, 52, 61, 0.836);
+	color: #ffffff96;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.534);
+}
+
+.group_set label {
+	font-family: 'Ubuntu', sans-serif;
+	transition: background .5s;
+	display: block;
+	text-align: left;
+}
+
+#selected {
+	font-family: 'Ubuntu', sans-serif;
+	position: absolute;
+	display: inline-block;
+	width: 600px;
+	height: 640px;
+}
+
+#selected h1 {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 100;
+	font-size: 15px;
+	margin-left: 20px;
+}
+
+.player {
+	font-family: 'Ubuntu', sans-serif;
+	width: 100%;
+	text-weight: bold;
+	text-indent: 10px;
+	padding: 5px;
+}
+
+.player:hover {
+	color: rgb(151, 151, 151);
+}
+
+.player:focus {
+	color: rgb(151, 151, 151);
+}
+
+.player:nth-child(odd) {
+	font-family: 'Ubuntu', sans-serif;
+	background: -webkit-linear-gradient(right, transparent 0%, rgba(54, 54, 61, 0.205) 100%);
+}
+
+.player.selected {
+	font-family: 'Ubuntu', sans-serif;
+	background: -webkit-linear-gradient(right, transparent 0%, white 100%);
+}
+
+.topbar {
+	font-family: 'Ubuntu', sans-serif;
+	height: 50px;
+	font-weight: bold;
+	font-size: 26px;
+	background: rgba(50, 52, 61, 0.24);
+}
+
+.body {
+	font-family: 'Ubuntu', sans-serif;
+	height: 650px;
+}
+
+.topbar p {
+	font-family: 'Ubuntu', sans-serif;
+	top: 0;
+	margin-top: 0;
+	padding: 10px;
+	display: inline-block;
+}
+
+#close {
+	font-family: 'Ubuntu', sans-serif;
+	display: inline-block;
+	float: right;
+	padding: 5px;
+	padding-right: 10px;
+	font-weight: 200;
+	font-size: 16px;
+	margin-top: 5px;
+	margin-right: 5px;
+	text-transform: uppercase;
+	color: white;
+}
+
+#close:hover {
+	color: rgb(151, 151, 151);
+}

@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    font-family: 'Lato', sans-serif;
+    user-select: none
+}
+
+:root {
+    --border-color: #1a1a1a8d;
+    --background-color: rgba(219, 73, 10, 0.66);
+}
+
+.garage-bg {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+    width: 800px;
+    height: 900px;
+
+    position: absolute;
+    top: 50%; 
+    /* left: 50%; */
+    transform: translate(-50%, -50%);
+
+    overflow: hidden;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.garage-bg .garage-header {
+    width: 100%;
+    height: 80px;
+
+    display: table;
+    table-layout: fixed;
+
+    background: #dd470b;
+}
+
+img {
+    width: 70px;
+    height: auto;
+    position: absolute;
+    top: 5%;
+    left: 1%;
+    transform: translateY(-50%);
+}
+
+
+.garage-bg .garage-header .garage-title {
+    color: #eee;
+    font-size: 40px;
+    padding: 15px 17px;
+
+    display: table-cell;
+    float: left;
+    height: 80px;
+    margin: 0px;
+    margin-left: calc(1% + 75px);
+
+    font-family: 'Lato';
+    font-weight: 400;
+    font-size: 37.5px;
+}
+
+.garage-bg .garage-container {
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+}
+
+.garage-bg .garage-container .collapsible {
+    margin: 50px 50px;
+
+    width: 90%;
+    max-height: 75%;
+    overflow: auto;
+
+    box-shadow: none; background: none; border: none
+}
+
+
+.force-overflow {
+  min-height: 450px;
+}
+
+.garage-bg .garage-container .collapsible::-webkit-scrollbar-track {
+  border: 1px solid #000;
+  padding: 2px 0;
+  background-color: #dd470b;
+}
+
+.garage-bg .garage-container .collapsible::-webkit-scrollbar {
+  width: 10px;
+}
+
+.garage-bg .garage-container .collapsible::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #dd470b;
+  border: 1px solid #000;
+}
+
+.garage-bg .garage-container .collapsible li {
+    background: #dd470b ;
+    font-size: 23px;
+
+    box-shadow: rgb(0 0 0 / 36%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    width: 95%;
+    margin-left: 2.5%;
+
+    transition: 200ms;
+
+    padding-bottom: 1vh;
+    border-radius: 5px;
+}
+
+.garage-bg .garage-container .collapsible li:not(:first-child) {
+    margin-top: 20px
+}
+
+.garage-bg .garage-container .collapsible li .collapsible-header {
+    color: #fff;
+    
+    background: none;
+    border: none!important;
+
+    display: block!important;
+    width: 100%;
+}
+
+.garage-bg .garage-container .collapsible li .collapsible-body {
+    border: none;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+}
+
+.garage-bg .garage-container .collapsible li .collapsible-body .vehicles {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.garage-bg .garage-container .collapsible li .collapsible-body .vehicles a {
+    width: 100%;
+    height: 40px;
+
+    font-size: 18px;
+    color: #eee;
+    padding: 7px 15px;
+}
+
+.garage-bg .garage-container .collapsible li .collapsible-body .vehicles a:hover {
+    background: #dd470b;
+}
+
+.garage-bg .garage-container .garage-actions {
+    background: #dd470b;
+
+    width: 650px;
+    height: 33.5%;
+
+    margin: 50px 50px;
+    overflow: hidden;
+    display: none;
+
+    box-shadow: rgb(0 0 0 / 36%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    border-radius: 20px;
+}
+
+
+.garage-bg .garage-container .garage-actions p[label] {
+    font-size: 35px;
+
+    color: #eee;
+
+    position: relative;
+    top: -23px;
+    left: 20px;
+}
+
+.garage-bg .garage-container .garage-actions button[action="Spawn"] {
+    box-shadow: none;
+
+    float: right;
+
+    position: relative;
+    top: -102.5px;
+    left: -20px;
+
+    transition: 200ms
+}
+
+.info-bg {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    top: 0px;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-flow: row wrap;
+}
+
+.info-bg .info {
+    background: #dd470b;
+    width: 277px;
+    height: 75px;
+    margin: 10px 15px;
+    transition: 200ms;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    padding: 18px 15px;
+    box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    border-radius: 15px;
+}
+
+.info-bg .info:hover {
+    background: #dd470b;
+    transition: 500ms;
+}
+
+.garage-bg .close {
+    position: absolute;
+    top: 94%;
+    left: 1%;
+}
+
+.top-shadow {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    left: 0px;
+    height: 10px;
+    background: linear-gradient(180deg, rgba(219, 73, 10, 0.66), var(--background-color));
+}
+
+button.btn-floating.waves-effect.green.accent-4:hover {
+    background: #dd470b!important;
+    transition: 500ms;
+}
+
+.garage-container .collapsible li:hover {
+    background: #dd470b;
+    transition: 500ms;
+}
+
+i.fas.fa-chevron-up {
+    float: right;
+    font-size: 25px;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 5px;
+}
+
+
+button.btn-floating.waves-effect.green.accent-4 {
+    left: calc(100% - 1vh - 40px);
+    margin-top: 1vh;
+}
+
+.garage-container .collapsible li:not(.active) {
+    height: 64px;
+    transition: 500ms
+}
+
+nav {
+    position: absolute;
+    bottom: 2.5vh;
+    left: 10%;
+    width: 80%;
+
+    background: #dd470b;
+    border-radius: 15px;
+    box-shadow: rgb(0 0 0 / 36%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+}
+
+.input-field input[type=search]:focus:not(.browser-default) {
+    background: transparent!important;
+}
+
+#search {
+    color: grey;
+    transition: 0.3s!important;
+}
+
+.input-field input[type=search]:focus:not(.browser-default)+label i, .input-field input[type=search]:focus:not(.browser-default) ~ .mdi-navigation-close, .input-field input[type=search]:focus:not(.browser-default) ~ .material-icons {
+    color: white!important;
+}
+
+.input-field input[type=search]:focus:not(.browser-default) {
+    color: white!important;
+}

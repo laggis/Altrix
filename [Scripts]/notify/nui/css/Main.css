@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Muli&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  font-family: 'Muli', sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.notify-container {
+  width: 20%;
+  height: 70%;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+
+}
+
+.notify-container .notify-notification {
+  width: 95%;
+  min-height: 75px;
+  margin-bottom: 20px;
+  display: block;
+  overflow: auto;
+  background: #DD3D01;
+  border: 2px solid #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.notify-container .notify-notification .notify-icon {
+  width: 15%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.notify-container .notify-notification .notify-icon i {
+  font-size: 40px;
+}
+
+.notify-container .notify-notification .notify-message {
+  width: 70%;
+  color: #eee;
+}
+
+.notify-container .notify-notification .notify-loader {
+  width: 15%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  stroke: #eee;
+}
+
+.notify-container .notify-notification .notify-loader circle {
+  stroke-dasharray: 130;
+  stroke-dashoffset: 0;
+  -webkit-animation: Fill 3s;
+          animation: Fill 3s;
+}
+
+@-webkit-keyframes Fill {
+  from {
+    stroke-dashoffset: 130;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes Fill {
+  from {
+    stroke-dashoffset: 130;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.notify-container ::-webkit-scrollbar {
+  display: none;
+}
+
+/*# sourceMappingURL=Main.css.map */

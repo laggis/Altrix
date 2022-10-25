@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `darkchat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` longtext DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

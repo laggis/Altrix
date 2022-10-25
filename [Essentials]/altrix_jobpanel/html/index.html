@@ -1,0 +1,422 @@
+<html>
+
+<head>
+	<meta charset="UTF8">
+
+	<link rel="stylesheet" href="Style/Dark.css" type="text/css">
+    <link rel="stylesheet" href="Style/Boilerplate.css" type="text/css">
+    <link rel="stylesheet" href="Style/Impl/Jobpanel.css" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+    <!-- Models -->
+
+    <script src="Models/Vendor/JQuery.js"></script>
+    <script src="Models/Vendor/Vue.js"></script>
+    <script src="Models/Atlas.js"></script>
+
+	<!-- Style -->
+	
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+
+<body>
+	<div id="viewmodel">
+		<div id="jobpanel-overlay" v-if="Show">
+			<div id="jobpanel-container">
+				<div class="navbar">
+					<br>
+					<p :class="{'selected': panel == 'OVERVIEW'}" @click="update_panel('OVERVIEW')"><i
+							class="fas fa-chalkboard"></i><i
+							class="fas fa-chevron-right"></i></p>
+					<p :class="{'selected': panel == 'EMPLOYEES'}" @click="update_panel('EMPLOYEES')"><i
+							class="fas fa-users"></i><i
+							class="fas fa-chevron-right"></i></p>
+					<p :class="{'selected': panel == 'INVOICES'}" @click="update_panel('INVOICES')"><i
+							class="fas fa-file-invoice-dollar"></i><i
+							class="fas fa-chevron-right"></i></p>
+				</div>
+				<div class="topbar">
+					<table cellspacing="10">
+						<tr>
+							<td style="color: rgba(235, 235, 255, 0.3);">Jobbpanel</td>
+							<td><i class="fas fa-chevron-right" style="font-size: 13px; color: rgba(130, 130, 130, 0.2)"></i></td>
+							<td style="color: rgba(235, 235, 255, 0.3);">{{Job.Label}}</td>
+						</tr>
+					</table>
+				</div>
+	
+				<!-- Overview -->
+				<div class="panel" v-if="panel == 'OVERVIEW'">
+					<div class="statistic-panel" @click="add_money()" style="margin-left: 14%">
+						<i class="fas fa-money-bill-alt" style="font-size: 80px"></i>
+						<div class="stats">
+							<p style="font-size: 23px"><span id="panel-stat-money">{{Statistics.Money}}</span></p>
+							<p style="font-size: 15px; text-transform: uppercase; margin-top: -10px; color: rgba(235, 235, 255, 0.3)">
+								Saldo (SEK)</p>
+						</div>
+					</div>
+					<div class="statistic-panel">
+						<i class="fas fa-business-time" style="font-size: 80px"></i>
+						<div class="stats">
+							<p style="font-size: 23px"><span id="panel-stat-days">{{Job.Employees.length}}</span></p>
+							<p style="font-size: 15px; text-transform: uppercase; margin-top: -10px; color: rgba(235, 235, 255, 0.3)">
+								Antal Anställda</p>
+						</div>
+					</div>
+					<div class="statistic-panel" style="margin-left: 27.2%; width: 20%;">
+						<i class="fas fa-user-tie" style="font-size: 80px"></i>
+						<div class="stats">
+							<p style="font-size: 23px"><span id="panel-stat-top-employee">{{Statistics.BestEmployee}}</span>
+							</p>
+							<p style="font-size: 15px; text-transform: uppercase; margin-top: -10px; color: rgba(235, 235, 255, 0.3)">
+								Ditt namn</p>
+						</div>
+					</div>
+					<hr>
+					<br>
+				</div>
+	
+				<!-- Employees -->
+				<div id="jobpanel-employees" v-if="panel == 'EMPLOYEES'">
+					<p style="color: rgba(235, 235, 255, 0.3); font-size: 20px">Personal <i class="fas fa-chevron-right"
+																							style="color: rgba(130, 130, 130, 0.2); font-size: 15px;"></i>
+						{{Job.Label}}</p>
+					<hr>
+					<table cellspacing="5" cellpadding="5">
+						<col width="30">
+						<col width="150">
+						<col width="100">
+						<col width="50">
+						<col width="140">
+						<col width="250">
+						<tr>
+							<th align="left">Id</th>
+							<th align="left">Namn</th>
+							<th align="left">Roll</th>
+							<th align="left">Lön</th>
+							<th align="left">Omsättning</th>
+							<th align="left">Åtgärder</th>
+						</tr>
+						<tr v-for="(employee, index) in Job.Employees">
+							<td>{{index + 1}}.</td>
+							<td nowrap>{{employee.Name}}</td>
+							<td nowrap>{{employee.Role.Label}}</td>
+							<td nowrap>{{employee.Role.Salary}}</td>
+							<td nowrap>EJ KLART</td>
+							<td>
+								<div>
+									<button class="button" style="margin-right: 5px"
+											@click="update_panel('EMPLOYEE_MANAGEMENT_ROLE'); Context.Employee = employee; Context.EmployeeRole = employee.Role;">
+										Ändra roll
+									</button>
+									<!-- <button class="button" style="margin-right: 5px"
+											@click="update_panel('EMPLOYEE_MANAGEMENT_SALARY'); Context.Employee = employee; Context.EmployeeRole = employee.Role;">
+										Justera lön
+									</button> -->
+									<button class="button button_fatal" @click="kick_employee(employee)">Sparka</button>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<br>
+					<hr>
+					<br>
+					<button class="button" @click="hire()">Anställ</button>
+				</div>
+
+				<!-- This is the invoice panel -->
+				<div id="jobpanel-employees" v-if="panel == 'INVOICES'">
+					<p style="color: rgba(235, 235, 255, 0.3); font-size: 20px">Fakturor <i class="fas fa-chevron-right" style="color: rgba(130, 130, 130, 0.2); font-size: 15px;"></i>
+						{{Job.Label}}</p>
+					<hr>
+					<table cellspacing="5" cellpadding="5">
+						<col width="450">
+						<col width="150">
+						<col width="100">
+						<tr>
+							<th align="left">Avsändare</th>
+							<th align="left">Saldo</th>
+							<th align="left">Datum</th>
+						</tr>
+						<tr v-for="(invoice, index) in Job.Invoices">
+							<td nowrap>{{invoice.invoiceSender}}</td>
+							<td nowrap>{{invoice.invoiceAmount}}</td>
+							<td nowrap>{{invoice.invoiceCreated}}</td>
+							<td>
+								<div>
+									<button class="button" @click="open_invoice(invoice)">Inspektera</button>
+								</div>
+							</td>
+						</tr>
+
+					</table>
+					<br>
+					<hr>
+					<br>
+					<p style="color: rgba(235, 235, 255, 0.3); font-size: 20px" v-if="Job.Invoices.length == 0">Inga fakturor</p>
+				</div>
+	
+				<!-- Employee Management (Change role) -->
+				<div class="panel" v-if="panel == 'EMPLOYEE_MANAGEMENT_ROLE'">
+					<p style="color: rgba(235, 235, 255, 0.3); font-size: 20px">{{Context.Employee.Name}} <i
+							class="fas fa-chevron-right"
+							style="color: rgba(130, 130, 130, 0.2); font-size: 15px;"></i> {{Job.Label}}
+					</p>
+					<hr>
+					<br>
+					<p style="color: var(--primary-accent)" @click="Context.RolesDropdown = !Context.RolesDropdown"
+					   onmouseover="this.style.cursor = 'pointer'" onmouseout="this.style.cursor = 'initial'">
+						{{Context.EmployeeRole.Label}} <i
+							class="fas"
+							:class="{'fa-chevron-down': !Context.RolesDropdown, 'fa-chevron-up': Context.RolesDropdown}"
+							style="margin-left: 10px; color: rgba(235, 235, 255, 0.3)"></i></p>
+					<hr style="width: 15%">
+					<div style="overflow: hidden">
+						<transition name="fade">
+							<div v-if="Context.RolesDropdown && Job != null && Job.Roles != null && Job.Roles.length > 0"
+								 id="employee-role-change-dropdown">
+								<p v-for="role in Job.Roles" @click="update_role(role)">{{role.Label}}</p>
+							</div>
+						</transition>
+					</div>
+					<br>
+					<br>
+					<button class="button"
+							@click="save_role_settings(Context.Employee, Context.EmployeeRole); update_panel('EMPLOYEES')">
+						Spara ändringar
+					</button>
+					<br>
+					<br>
+					<button class="button" @click="update_panel('EMPLOYEES')">Avbryt</button>
+				</div>
+
+				<transition name="modal" mode="out-in">
+					<div class="modal" v-if="modal.state">
+						<div class="modal-box">
+							<p>{{modal.header}}</p>
+							<hr>
+							<label v-if="modal.type == 1">
+								<input ref="modal_input" class="textbox" placeholder="Personnummer">
+								<br>
+								<br>
+							</label>
+							<label v-if="modal.type == 2">
+								<input ref="modal_input" class="textbox" placeholder="Saldo">
+								<br>
+								<br>
+							</label>
+							<button class="button" style="float: right;  margin-left: 10px; margin-right: 30px"
+									@click="modal.callback()">
+								{{modal.button_approve}}
+							</button>
+							<button class="button" style="float: right" @click="flush_modal()">{{modal.button_cancel}}
+							</button>
+							<br>
+							<br>
+						</div>
+					</div>
+				</transition>
+	</div>
+
+	<script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<script>
+		const Viewmodel = new Vue({
+        el: "#viewmodel",
+        data: {
+            Show : false,
+            panel: "OVERVIEW",
+            Job: {
+				Name : "police",
+				Label : "Polis",
+				Roles : [
+					// {
+					// 	Name: "recruit",
+					// 	Label: "Aspirant",
+					// 	Grade: 0,
+					// 	Salary : 90
+					// },
+					// {
+					// 	Name: "officer",
+					// 	Label: "Konstapel",
+					// 	Grade: 1,
+					// 	Salary : 120
+					// },
+					// {
+					// 	Name: "sergeant",
+					// 	Label: "Befäl",
+					// 	Grade: 2,
+					// 	Salary : 150
+					// },
+					// {
+					// 	Name: "lieutenant",
+					// 	Label: "Vice Polischef",
+					// 	Grade: 3,
+					// 	Salary : 180
+					// },
+					// {
+					// 	Name: "boss",
+					// 	Label: "Polischef",
+					// 	Grade: 4,
+					// 	Salary : 210
+					// }
+				],
+				Employees : [
+					// {
+					// 	Name : "Joel Eriksson",
+					// 	Role : {
+					// 		Name: "boss",
+					// 		Label: "Polischef",
+					// 		Grade: 4,
+					// 		Salary : 210
+					// 	},
+					// 	MonthlyRevenue : 5000,
+					// 	TotalRevenue : 13300
+					// }
+				],
+				Invoices : [
+					// {
+					// 	invoiceSender : "Ulf Albukki Telekaka Michekela Kafereska - Autoexperten",
+					// 	invoiceAmount : 5500,
+					// 	invoiceCreated : "2019-04-17"
+					// }
+				]
+			},
+            Statistics: {
+				// Money : 5000,
+				// RegisteredDays : 7,
+				// BestEmployee : "Johan Eriksson"
+			},
+            Context: {
+                RolesDropdown: false,
+                Employee: {},
+                EmployeeRole: []
+            },
+            modal: {
+                state: false,
+                header: "",
+                button_approve: "Yes",
+                button_cancel: "No",
+                type: 0,
+                callback: DefaultCallback
+            },
+        },
+        methods: {
+            open_modal(header, callback, button_approve, button_cancel, type) {
+                this.modal.state = true;
+                this.modal.header = header;
+                this.modal.button_approve = button_approve;
+                this.modal.button_cancel = button_cancel;
+                this.modal.callback = callback;
+                this.modal.type = type;
+            },
+            flush_modal() {
+                this.modal.state = false;
+                this.modal.header = "";
+                this.modal.button_approve = "Yes";
+                this.modal.button_cancel = "No";
+                this.modal.callback = DefaultCallback;
+                this.modal.type = 0;
+            },
+            update_panel(panelId) {
+                this.panel = panelId;
+
+                if (panelId === "OVERVIEW") {
+                    Vue.nextTick(() => {
+                        Atlas.animate_statistic("#panel-stat-money");
+                        Atlas.animate_statistic("#panel-stat-days");
+                        Atlas.animate_statistic("#panel-stat-top-employee");
+                    });
+                }
+            },
+            update_role(role) {
+                this.Context.EmployeeRole = role;
+                this.Context.RolesDropdown = false
+            },
+            open_invoice(invoice) {
+				Viewmodel.Show = false;
+
+				Atlas.emit_client_event("rdrp_jobpanel:togglePanel", false)
+				Atlas.emit_client_event("rdrp_invoice:openInvoice", JSON.stringify(invoice))
+            },
+            save_role_settings(employee, role) {
+                employee.Role = role;
+
+                const employees = this.Job.Employees.filter(self => self.cid !== employee.cid);
+
+                employees.push(employee);
+
+                this.Job.Employees = employees;
+
+				Atlas.emit_client_event("rdrp_jobpanel:updateEmployee", { playerCid: employee.cid, jobName: this.Job.Name, Role : employee.Role });
+            },
+            kick_employee(employee) {
+                this.open_modal("Vill du sparka " + employee.Name + "?", () => {
+                    this.flush_modal();
+
+                    Atlas.emit_client_event("rdrp_jobpanel:fireEmployee", { playerCid: employee.cid });
+
+                    this.Job.Employees = this.Job.Employees.filter(self => self.cid !== employee.cid);
+                }, "Ja", "Avbryt", 0);
+            },
+            hire() {
+                this.open_modal("Anställ person", () => {
+                    this.flush_modal();
+
+                    const person = this.$refs.modal_input.value;
+
+					Atlas.emit_client_event("rdrp_jobpanel:hireEmployee", { playerCid: person, jobName: this.Job.Name });
+                }, "Anställ", "Avbryt", 1)
+            },
+            add_money() {
+                this.open_modal("Hur mycket vill du lägga in?", () => {
+                    this.flush_modal();
+
+					const value = this.$refs.modal_input.value;
+
+					this.Statistics.Money += parseInt(value)
+
+                    Atlas.emit_client_event("rdrp_jobpanel:addMoney", { jobName: this.Job.Name, amount : parseInt(value) })
+                }, "Lägg in", "Avbryt", 2)
+            }
+        }
+    });
+
+	window.addEventListener("message", (event) => {
+		switch (event.data["Operation"]) {
+			case "OPEN_PANEL": {
+				Viewmodel.flush_modal();
+				Viewmodel.Show = true;
+				Viewmodel.Job = event.data["Job"];
+				Viewmodel.Statistics = event.data["Statistics"];
+				Viewmodel.Invoices = event.data["Job"]["Invoices"];
+				Viewmodel.update_panel("OVERVIEW");
+
+				break;
+			}
+			case "ADD_EMPLOYEE": {
+				Viewmodel.Job.Employees = event.data["Employees"]
+
+				break;
+			}
+		}
+	});
+
+	window.addEventListener("keydown", event => {
+		if (Viewmodel.Show && event.keyCode === 27) {
+			event.preventDefault();
+
+			Viewmodel.Show = false;
+
+			Atlas.emit_client_event("rdrp_jobpanel:togglePanel", false)
+		}
+	});
+	</script>
+</body>
+
+</html>

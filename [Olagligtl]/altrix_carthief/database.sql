@@ -1,0 +1,1 @@
+ALTER TABLE `characters` ADD COLUMN `carthief_delay` BIGINT NOT NULL;
