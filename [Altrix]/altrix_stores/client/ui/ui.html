@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body style="background: rgb(0, 0, 0, 0)">
+    <div id="app">
+      <div class="wrapper">
+        <div class="categories">
+          <ul>
+            <img class="logga" src="https://media.discordapp.net/attachments/969695445280518144/973283050035228702/norrlandsguld.png">
+            <li class="tab current" id="foods">Maträtter</li>
+            <li class="tab" id="dialtrix">Dialtrix</li>
+            <li class="tab" id="drinks">Drickor</li>
+            <li class="tab" id="freeze">Snacks</li>
+            <li class="tab" id="tobak">Tobak</li>
+          </ul>
+        </div>
+        <div class="products"></div>
+
+        <div class="buy-modal">
+          <div class="content">
+            <div class="info">
+              <div class="item"></div>
+            </div>
+
+            <div id="li" style="padding: 1rem">
+              <a
+                id="cash"
+                class="buy btn-floating btn-small green lighten-1 waves-effect waves-light"
+                ><i class="bi bi-cart-plus-fill"></i
+              ></a>
+              <a
+                id="close"
+                class="btn-floating btn-small red lighten-1 waves-effect waves-light"
+                ><i class="bi bi-box-arrow-right"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

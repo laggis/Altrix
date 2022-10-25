@@ -1,0 +1,58 @@
+ESX = nil
+
+TriggerEvent('esx:getSharedObject', function(obj)
+	ESX = obj
+end)
+
+RegisterServerEvent('esx:discardInventoryItem')
+AddEventHandler('esx:discardInventoryItem', function(item, count)
+	local _source = source
+	local xPlayer  = ESX.GetPlayerFromId(source)
+
+  	xPlayer.removeInventoryItem(item, count)
+end)
+
+RegisterServerEvent('esx:giveWeaponInventoryItem')
+AddEventHandler('esx:giveWeaponInventoryItem', function(item, count)
+	local _source = source
+	local xPlayer  = ESX.GetPlayerFromId(source)
+
+	if xPlayer then
+		xPlayer.addInventoryItem(item, count)
+	end
+end)
+
+RegisterServerEvent('esx:modelChanged')
+AddEventHandler('esx:modelChanged', function(id)
+	TriggerClientEvent('esx:modelChanged', id)
+end)
+
+ESX.RegisterUsableItem('pistol_ammo_box', function(source)
+	local xPlayer  = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem('pistol_ammo_box', 1)
+	xPlayer.addInventoryItem('pistol_ammo', 24)
+end)
+
+ESX.RegisterUsableItem('smg_ammo_box', function(source)
+	local xPlayer  = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem('smg_ammo_box', 1)
+	xPlayer.addInventoryItem('smg_ammo', 30)
+end)
+
+ESX.RegisterUsableItem('rifle_ammo_box', function(source)
+	local xPlayer  = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem('rifle_ammo_box', 1)
+	xPlayer.addInventoryItem('rifle_ammo', 30)
+end)
+
+ESX.RegisterUsableItem('shotgun_ammo_box', function(source)
+	local xPlayer  = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem('shotgun_ammo_box', 1)
+	xPlayer.addInventoryItem('shotgun_ammo', 16)
+end)
+
+ESX.RegisterUsableItem('sniper_ammo_box', function(source)
+	local xPlayer  = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem('sniper_ammo_box', 1)
+	xPlayer.addInventoryItem('sniper_ammo', 16)
+end)

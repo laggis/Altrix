@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto Condensed', sans-serif
+}
+
+#wrapper {
+  display: none;
+}
+
+.background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 800px;
+  background-color: rgb(241, 241, 241)
+}
+
+.background input {
+  border: 2px solid rgb(194, 194, 194);
+  padding: 25px;
+  width: 420px;
+  font-size: 24px;
+  position: absolute;
+  top: 200px;
+  left: 48px;
+}
+
+.background input:focus {
+  outline: none;
+  border: 2px solid rgb(119, 119, 119);
+}
+
+.background ::placeholder {
+  letter-spacing: 1px;
+}
+
+.background #close {
+  font-size: 30px;
+  color: rgb(107, 107, 107);
+  position: absolute;
+  top: 755px;
+  left: 15px;
+}
+
+.background #search {
+  border: 2px solid rgb(194, 194, 194);
+  color: rgb(107, 107, 107);
+  background-color: white;
+  padding: 27.5px;
+  font-size: 20px;
+  letter-spacing: 3px;
+  position: absolute;
+  top: 200px;
+  left: 533px;
+}
+
+.background #search:hover {
+  outline: none;
+  border: 2px solid rgb(119, 119, 119);
+}
+
+.background #search:focus {
+  outline: none;
+}
+
+.background #result {
+  display: none;
+  background-color: rgb(194, 194, 194);
+  width: 85%;
+  height: 35%;
+  color: rgb(107, 107, 107);
+  position: absolute;
+  top: 340px;
+  left: 48px;
+}
+
+.background #result #header {
+  position: absolute;
+  left: 200px;
+  top: 10px;
+  font-size: 45px
+}
+
+.background #result #vehicleinfo {
+  display: none;
+  font-size: 25px;
+  margin-top: 45px;
+  margin-left: 50px;
+}
+
+.background #result #vehicleinfo hr {
+    width: 60%;
+    margin-left: 0px;
+    border: 1px solid rgb(107, 107, 107)
+}
+
+@media only screen and (max-width: 1250px) {
+  .container {
+    width: 100%;
+  }
+}

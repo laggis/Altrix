@@ -1,0 +1,387 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow: hidden
+}
+
+.menus
+{
+	height: 100%;
+	width: 100%;
+	font-family: Open Sans,sans-serif;
+	padding: 20px
+}
+
+.menu,.menus
+{
+	position: absolute
+}
+
+.menu
+{
+	width: 300px;
+    background: #9b5403 url(https://media.discordapp.net/attachments/967743856189784104/973303603739644004/asdadasdsad.png) no-repeat 110px center;
+    background-size: 110px 100px;
+	padding: 2.5px 13px 9px;
+    border-radius: 0px;
+    border: 2px solid #030000;
+	overflow: hidden
+}
+
+.hidden
+{
+	display: none
+}
+
+.menu.align-left
+{
+	left: 40;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%)
+}
+
+.menu.align-top-left
+{
+	left: 40;
+	top: 40
+}
+
+.menu.align-top
+{
+	left: 50%;
+	top: 40;
+	-webkit-transform: translate(-50%);
+	transform: translate(-50%)
+}
+
+.menu.align-top-right
+{
+	right: 5%;
+	top: 5%
+}
+
+.menu.align-right
+{
+	right: 5%;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%)
+}
+
+.menu.align-bottom-right
+{
+	right: 5%;
+	bottom: 5%
+}
+
+.menu.align-bottom
+{
+	left: 50%;
+	bottom: 5%;
+	-webkit-transform: translate(-50%);
+	transform: translate(-50%)
+}
+
+.menu.align-bottom-left
+{
+	bottom: 5%
+}
+
+.menu.align-center
+{
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%)
+}
+
+.menu .head
+{
+	font-weight: 700;
+	position: relative;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+	text-transform: uppercase
+}
+
+.menu .head-line
+{
+	position: absolute;
+	top: 50%;
+	display: block;
+	content: "";
+	width: 50%;
+	height: 1px;
+	background-color: #1b1c1dc5;
+	-webkit-animation: head-line .6s linear;
+	animation: head-line .6s linear
+}
+
+.head-line-last
+{
+	margin-left: 50%
+}
+
+@-webkit-keyframes head-line
+{
+	0%
+	{
+		background-color: #1b1c1dc5
+	}
+
+	to
+	{
+		background-color: #dddddd
+	}
+}
+
+@keyframes head-line
+{
+	0%
+	{
+		background-color: #1b1c1dc5
+	}
+
+	to
+	{
+		background-color: #dddddd
+	}
+}
+
+.menu .head p
+{
+	position: relative;
+	z-index: 2;
+	display: inline-block;
+	padding-left: 1em;
+	padding-right: 1em;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #1b1c1dc5
+}
+
+.menu-status
+{
+	height: 100%;
+	max-width: 10px;
+	min-width: 10px;
+	border-radius: 2px;
+	background: rgba(20, 20, 20, 0.363);
+	float: left;
+	margin: 0px;
+	overflow: hidden
+}
+
+.menu-status-inner
+{
+	width: 100%;
+	background: #dddddd;
+	position: relative;
+	height: 0
+}
+
+.menu .menu-items
+{
+	max-height: 400px
+}
+
+.menu .menu-items .menu-item
+{
+	display: flex;
+    align-items: center;
+	background: rgba(20, 20, 20, 0.363);
+    color: #fff;
+    border: 1px solid #1b1c1dc5;
+	height: 40px;
+	font-size: 15px;
+	border-radius: 0px
+}
+
+.menu-label
+{
+	float: left;
+	margin-left: 15px;
+	white-space: nowrap
+}
+
+br
+{
+	content: "";
+	margin: 0em;
+	display: block;
+	font-size: 24%
+}
+
+.menu .menu-items .menu-item.selected.up .menu-status .menu-status-inner
+{
+	height: 100%;
+	-webkit-animation: new-up .2s linear;
+	animation: new-up .2s linear;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards
+}
+
+.menu-item.old.up .menu-status .menu-status-inner
+{
+	height: 100%;
+	top: 0;
+	-webkit-animation: old-up .2s linear;
+	animation: old-up .2s linear;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards
+}
+
+.menu .menu-items .menu-item.selected.down .menu-status .menu-status-inner
+{
+	height: 100%;
+	-webkit-animation: new-down .2s linear;
+	animation: new-down .2s linear;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards
+}
+
+.menu-item.old.down .menu-status .menu-status-inner
+{
+	height: 100%;
+	top: 0;
+	-webkit-animation: old-down .2s linear;
+	animation: old-down .2s linear;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards
+}
+
+.menu-item-anim-appear
+{
+	-webkit-transform: scale(0);
+	transform: scale(0)
+}
+
+.menu-item-anim-appear-done
+{
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: -webkit-transform .2s;
+	transition: -webkit-transform .2s;
+	transition: transform .2s;
+	transition: transform .2s,-webkit-transform .2s
+}
+
+@-webkit-keyframes old-up
+{
+	0%
+	{
+		height: 100%
+	}
+
+	to
+	{
+		height: 0%
+	}
+}
+
+@keyframes old-up
+{
+	0%
+	{
+		height: 100%
+	}
+
+	to
+	{
+		height: 0%
+	}
+}
+
+@-webkit-keyframes new-up
+{
+	0%
+	{
+		height: 0%;
+		top: 100%
+	}
+
+	to
+	{
+		height: 100%;
+		top: 0
+	}
+}
+
+@keyframes new-up
+{
+	0%
+	{
+		height: 0%;
+		top: 100%
+	}
+
+	to
+	{
+		height: 100%;
+		top: 0
+	}
+}
+
+@-webkit-keyframes new-down
+{
+	0%
+	{
+		height: 0%
+	}
+
+	to
+	{
+		height: 100%
+	}
+}
+
+@keyframes new-down
+{
+	0%
+	{
+		height: 0%
+	}
+
+	to
+	{
+		height: 100%
+	}
+}
+
+@-webkit-keyframes old-down
+{
+	0%
+	{
+		height: 100%;
+		top: 0
+	}
+
+	to
+	{
+		height: 0%;
+		top: 100%
+	}
+}
+
+@keyframes old-down
+{
+	0%
+	{
+		height: 100%;
+		top: 0
+	}
+
+	to
+	{
+		height: 0%;
+		top: 100%
+	}
+}
+
+
+/*# sourceMappingURL=main.7de9eb10.chunk.css.map */

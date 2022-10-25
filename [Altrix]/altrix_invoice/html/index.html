@@ -1,0 +1,437 @@
+<html>
+
+<head>
+	<meta charset="UTF8">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <link href="./css/tailwind.css" rel="stylesheet" type="text/css">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="overlay" v-if="Show">
+
+        <div class="min-h-screen flex">
+            <div class="m-auto flex flex-col gap-8 bg-white w-1/2 h-1/3 px-12 py-8 rounded-lg">
+              <div class="flex flex-row justify-between">
+                <h1 class="my-auto text-3xl text-black-500 font-medium">Faktura</h1>
+                <img src="https://media.discordapp.net/attachments/969695445280518144/972898727691960320/asdadasdsad.png" width="12.5%" />
+              </div>
+              <div v-if="CreateInvoice.Show" class="flex flex-col gap-8">
+                <div class="flex flex-row gap-6 ml-auto">
+                    <div class="flex flex-col gap-1">
+                        <span>Sök efter namn</span>
+                        <input class="border-2 border-orange-500 h-8 p-2 rounded focus:outline-none focus:border-2 focus:border-orange-400" name="name" type="text" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span>Välj person</span>
+                        <select @change="showValues()" id="playerList" class="border-2 border-orange-500 h-8 pl-1 rounded">
+                            <option v-for="player in Players" :value="player.cid">{{ player.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-row gap-4 ml-auto">
+                    <span class="my-auto text-gray-400" id="total">{{ Players.length }} resultat</span>
+                    <button v-on:click="showAll" class="bg-orange-500 px-2 py-1 rounded-lg text-white my-auto">Visa alla</button>
+                    <button v-on:click="showResult" class="bg-orange-700 px-2 py-1 rounded-lg text-white my-auto">Sök</button>
+                  </div>
+              </div>
+              <div class="flex flex-row justify-between gap-8">
+                <div class="flex flex-col gap-4 justify-between border-2 border-dashed border-gray-200 rounded p-4 w-1/2">
+                  <h1 class="font-medium text-xl text-orange-500">Mottagare</h1>
+                  <div>
+                    <div class="flex justify-between" v-if="CreateInvoice.Show"><span>Namn</span><span class="font-bold">{{ activeName }}</span></div>
+                    <div class="flex justify-between" v-if="ShowInvoice.Show"><span>Namn</span><span class="font-bold">{{ Application.Recieved }}</span></div>
+                    <div class="flex justify-between"><span>Personnummer</span><span class="font-bold">{{ activeCid }}</span></div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4 justify-between border-2 border-dashed border-gray-200 rounded p-4 w-1/2">
+                  <h1 class="font-medium text-xl text-orange-500">Avsändare</h1>
+                  <div>
+                    <div class="flex justify-between"><span>Namn</span><span class="font-bold">{{ Application.Creator.split(' - ')[0] }}</span></div>
+                    <div class="flex justify-between"><span>Företag/Organisation</span><span class="font-bold">{{ Application.Creator.split(' - ')[1] }}</span></div>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="flex flex-row justify-between gap-8">
+                <div class="flex flex-col gap-4 border-2 border-dashed border-gray-200 rounded p-4 w-1/2">
+                  <h1 class="font-medium text-xl text-orange-500">Uppgifter</h1>
+                  <div class="flex flex-col flex-grow gap-4">
+                    <div class="flex flex-col flex-grow">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold">Pris</span>
+                        <div class="flex flex-row gap-2">
+                          <input v-if="CreateInvoice.Show" class="border-2 border-orange-500 h-8 p-2 rounded w-1/3 focus:outline-none focus:border-2 focus:border-orange-400" type="text" placeholder="2500" v-model="CreateInvoice.InvoiceAmount">
+                          <input v-if="ShowInvoice.Show" v-model="ShowInvoice.InvoiceAmount" class="border-2 border-gray-300 h-8 p-2 rounded w-1/3" disabled type="text" />
+                          <span class="font-bold font-mono text-orange-500 my-auto">SEK</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col flex-grow">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold">Beskrivning</span>
+                        <input v-if="CreateInvoice.Show" v-model="CreateInvoice.InvoiceReason" class="border-2 border-orange-500 h-8 p-2 rounded w-full focus:outline-none focus:border-2 focus:border-orange-400" placeholder="Kort sammanfattning" type="text" />
+                        <input v-if="ShowInvoice.Show" v-model="ShowInvoice.InvoiceReason" class="border-2 border-orange-300 h-8 p-2 rounded w-full" disabled value="Kort sammanfattning" type="text" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4 border-2 border-dashed border-gray-200 rounded p-4 w-1/2">
+                  <h1 class="font-medium text-xl text-orange-500">Information</h1>
+                  <div class="flex flex-col flex-grow gap-4">
+                    <div class="flex flex-col flex-grow">
+                      <span>Fakuranummer: <span class="font-bold font-mono">{{ Application.fakeData[0] }}</span></span>
+                      <span>Ordernummer: <span class="font-bold font-mono">{{ Application.fakeData[1] }}</span></span>
+                    </div>
+                    <div class="flex flex-col flex-grow">
+                      <span>VAT-nummer: <span class="font-bold font-mono">{{ Application.fakeData[2] }}</span></span>
+                    </div>
+                    <div class="flex flex-col flex-grow">
+                      <span>Bankgiro: <span class="font-bold font-mono">{{ Application.fakeData[3] }}</span></span>
+                      <span>ABA-kod: <span class="font-bold font-mono">{{ Application.fakeData[4] }}</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="flex flex-col ml-auto">
+                <div v-if="CreateInvoice.Show" class="flex gap-4 text-white">
+                  <button class="bg-gray-500 px-2 py-1 rounded-lg mt-auto" id="cancel" v-on:click="Cancel()">Avbryt</button>
+                  <button class="bg-gray-700 px-2 py-1 rounded-lg mt-auto" id="acceptDeal" v-on:click="AcceptCreateInvoice()">Skicka faktura</button>
+                </div>
+                <div v-if="ShowInvoice.Show" class="flex gap-4 text-white">
+                    <button class="bg-gray-500 px-2 py-1 rounded-lg mt-auto" id="cancel" v-on:click="Cancel()">Avbryt</button>
+                    <button class="bg-orange-700 px-2 py-1 rounded-lg mt-auto" id="acceptDeal" v-on:click="AcceptInvoice()">Betala</button>
+                  </div>
+              </div>
+          
+              <div class="flex flex-col justify-between gap-4">
+                <div v-if="CreateInvoice.Show">Fakturan kommer skapas <span class="font-medium text-black-500" v-model="Date">{{ today() }}</span> och ska vara betald inom en vecka.</div>
+                <div v-if="ShowInvoice.Show">Fakturan skapades <span class="font-medium text-black-500" v-model="Date">{{ Application.Date }}</span> och ska vara betald inom en vecka.</div>
+                
+                <div v-if="CreateInvoice.Show">Om kunden inte betalar fakturan inom <span class="font-medium text-orange-500">{{ nextWeek() }}</span> så går ärendet vidare till <span class="font-medium text-orange-500">Kronofogden</span>.</div>
+                <div v-if="ShowInvoice.Show">Om fakturad inte är betalt inom <span class="font-medium text-orange-500">{{ nextWeek(Application.Date) }}</span> så går ärendet vidare till <span class="font-medium text-orange-500">Kronofogden</span>.</div>
+            </div>
+            </div>
+        </div>         
+	</div>
+
+	<script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<script>
+		const Application = new Vue({
+			el: '#overlay',
+			data: {
+				Show: false,
+
+				InvoiceID: Math.floor(Math.random() * 101),
+
+				Creator: "",
+				Recieved: "",
+				Date: "",
+
+				Players: [
+
+				],
+
+				CreateInvoice: {
+					Show: false,
+
+					InvoiceAmount: "",
+					InvoiceReason: ""
+				},
+
+				ShowInvoice: {
+					Show: false,
+
+					InvoiceAmount: "",
+					InvoiceReason: ""
+				},
+
+                activeName: "",
+                activeCid: "",
+
+                fakeData: [
+                    '471492',
+                    '5201 7595',
+                    '82358-20588',
+                    '2111-7330-2352',
+                    '88599338386724'
+                ],
+			},
+            methods: {
+                showResult() {
+                    let nameInput = document.querySelector("input[name=name]").value;
+                    let select = document.querySelector("select[id=playerList]");
+                    let total = document.querySelector("span[id=total]");
+
+                    let res = Application.Players.filter(obj => obj.name.toLowerCase().includes(nameInput.toLowerCase()));
+
+                    select.textContent = "";
+
+                    if(res.length < 1)
+                    {
+                        let option = document.createElement('option');
+
+                        option.value = "default";
+                        option.textContent = "Inga resultat";
+
+                        select.appendChild(option);
+
+                        Application.activeName = "";
+                        Application.activeCid = "";
+                    }
+                    else
+                    {
+                        for (let i = 0; i < res.length; i++)
+                        {
+                            let option = document.createElement('option');
+
+                            option.value = res[i].cid;
+                            option.textContent = res[i].name;
+
+                            select.appendChild(option);
+                        }
+
+                        Application.activeName = res[0].name;
+                        Application.activeCid = res[0].cid;
+                    }
+
+                    if(select.options.length === 1)
+                    {
+                        Application.activeName = res[0].name;
+                        Application.activeCid = res[0].cid;
+                    }
+
+                    total.textContent = res.length + " resultat";
+                },
+                showValues()
+                {
+                    let nameInput = document.querySelector("input[name=name]").value;
+                    let select = document.querySelector("select[id=playerList]");
+                    let total = document.querySelector("span[id=total]");
+
+                    let res = Application.Players.filter(obj => obj.name.toLowerCase().includes(nameInput.toLowerCase()));
+
+                    if(res.length < 1)
+                    {
+                        Application.activeName = "";
+                        Application.activeCid = "";
+                    }
+                    else
+                    {
+                        let player = Application.Players.find(obj => { return obj.cid === select.options[select.selectedIndex].value })
+                        
+                        Application.activeName = player.name;
+                        Application.activeCid = player.cid;
+                    }
+                },
+                showAll() {
+                    let nameInput = document.querySelector("input[name=name]").value;
+                    let select = document.querySelector("select[id=playerList]");
+                    let total = document.querySelector("span[id=total]");
+
+                    select.textContent = "";
+                    
+                    for (let i = 0; i < Application.Players.length; i++)
+                    {
+                        let option = document.createElement('option');
+
+                        option.value = Application.Players[i].id;
+                        option.textContent = Application.Players[i].name;
+
+                        select.append(option);
+                    }
+
+                    Application.activeName = Application.Players[0].name;
+                    Application.activeCid = Application.Players[0].cid;
+
+                    total.textContent = Application.Players.length + " resultat";
+                },
+                today() {
+                    return new Date().toISOString().split('T')[0];
+                },
+                num(length) {
+                    let res = '';
+                    let chars = '0123456789';
+
+                    for (let i = 0; i < length; i++ )
+                    {
+                        res += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+
+                    return res;
+                },
+                nextWeek(date) {
+                    let today;
+
+                    if(!date) {
+                        today = new Date()
+                    } else {
+                        today = new Date(date);
+                    }
+
+                    today.setTime(today.getTime() + (7 * 24 * 60 * 60 * 1000));
+
+                    return today.toISOString().split('T')[0];
+                },
+                onChange() {
+                    let select = document.querySelector("select[id=playerList]");
+
+                    Application.activeName = select[select.selectedIndex].textContent;
+                },
+            },
+		})
+
+		window.addEventListener("message", function (passed) {
+			var data = passed.data
+
+			switch (data.Action) {
+				case "CREATE_INVOICE":
+					StartCreatingInvoice(data)
+
+					break
+				case "OPEN_INVOICE":
+					ShowInvoice(data.InvoiceData)
+
+					if (data.InvoiceData["jobInvoice"]) {
+						Application.Job = true
+					}
+
+					break
+				default:
+					console.log("Could not read message with action: " + data.Action)
+					break
+			}
+		})
+
+		window.PushPipe = function (event, data) {
+			const pipe = {
+				__event: event,
+				__data: data
+			}
+
+			$.post("http://nuipipe/__piperesponse", JSON.stringify(pipe))
+		}
+
+		window.StartCreatingInvoice = function (data, job) {
+			Application.Players = JSON.parse(data.Players)
+
+            Application.activeName = Application.Players[0].name
+            Application.activeCid = Application.Players[0].cid,
+
+			Application.Creator = data.Creator
+
+			Application.Date = Application.today();
+
+			Application.Show = true
+			Application.CreateInvoice.Show = true
+
+            Application.Players.push(
+            );
+		}
+
+		window.ShowInvoice = function (data) {
+			Application.Show = true
+			Application.ShowInvoice.Show = true
+			Application.ShowInvoice.InvoiceAmount = data.invoiceAmount
+			Application.ShowInvoice.InvoiceReason = data.invoiceText
+			Application.InvoiceID = data.invoiceId
+
+			Application.Creator = data.invoiceSender
+			Application.Date = data.invoiceCreated.toString()
+			Application.Recieved = data.recievedName
+			Application.Company = data.invoiceType
+
+            Application.activeCid = data.cid
+		}
+
+		window.AcceptCreateInvoice = function () {
+			var InvoiceAmount = Application.CreateInvoice.InvoiceAmount
+			var InvoiceText = Application.CreateInvoice.InvoiceReason
+
+			var PlayerList = document.getElementById("playerList")
+			var SelectedPlayer = PlayerList.selectedIndex
+			var PlayerInformation = PlayerList.options[SelectedPlayer]
+
+			PlayerInformation["cid"] = Application.Players[SelectedPlayer].cid
+
+            let player = Application.Players.find(obj => { return obj.cid === PlayerList.options[PlayerList.selectedIndex].value })
+
+			PushPipe("altrix_invoice:createInvoice", {
+				amount: InvoiceAmount,
+				text: InvoiceText,
+				player: player
+			})
+
+			ResetForm()
+		}
+
+		window.AcceptInvoice = function () {
+			var InvoiceAmount = Application.ShowInvoice.InvoiceAmount
+			var InvoiceID = Application.InvoiceID
+			var InvoiceCompany = Application.Company
+
+			if (Application.Job) {
+				PushPipe("altrix_invoice:payInvoice", {
+					amount: InvoiceAmount,
+					invoiceId: InvoiceID,
+					invoiceCompany: InvoiceCompany,
+					job: true
+				})
+			} else {
+				PushPipe("altrix_invoice:payInvoice", {
+					amount: InvoiceAmount,
+					invoiceId: InvoiceID,
+					invoiceCompany: InvoiceCompany
+				})
+			}
+
+			ResetForm()
+		}
+
+		window.Cancel = function () {
+			PushPipe("altrix_invoice:cancelInvoice")
+
+			ResetForm()
+		}
+
+		window.addEventListener("keydown", event => {
+			if (event.keyCode === 27) {
+				event.preventDefault();
+
+				PushPipe("altrix_invoice:cancelInvoice")
+
+				ResetForm()
+			}
+		});
+
+		window.Change = function () {
+			Application.ShowInvoice.InvoiceAmount = Application.CreateInvoice.InvoiceAmount
+		}
+
+		window.ResetForm = function () {
+			Application.Show = false
+
+			Application.CreateInvoice.Show = false
+			Application.CreateInvoice.InvoiceAmount = ""
+			Application.CreateInvoice.InvoiceReason = ""
+
+			Application.ShowInvoice.Show = false
+			Application.ShowInvoice.InvoiceAmount = ""
+			Application.ShowInvoice.InvoiceReason = ""
+
+			Application.Creator = ""
+
+            Application.activeName = ""
+            Application.activeCid = ""
+
+			Application.Players = []
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+﻿html {
+    font-family: 'Roboto', Helvetica, arial, sans-serif;
+    color: #fff
+}
+
+#wrap {
+    width: 700px;
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    min-height: 300px;
+    background: #1205c2(0, 0, 0, 0.466) url(https://cdn.discordapp.com/attachments/950885445036830740/952001213929500742/image-removebg-preview_13_1.png) no-repeat fixed;
+    background-position: 50% 30%;
+    background-size: 160px 150px;
+    border-top: 2px solid rgba(255, 255, 255, 0.747);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.747);
+    border-left: 2px solid rgba(255, 255, 255, 0.747);
+    border-right: 2px solid rgba(255, 255, 255, 0.747);
+    border-radius: 25px
+}
+
+
+
+/* Header */
+#scoreboard_header {
+    display: flex;
+    justify-content: space-between
+}
+
+p {
+    font-weight: 150;
+    font-size: 2.1em;
+    margin-bottom: 5px
+}
+
+
+
+/* Scoreboard - Table */
+
+table {
+    max-height: 58vh;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+    align-content: space-between
+}
+
+th {
+    padding-top: 10px;
+    height: 20px
+}
+
+tr {
+    display: flex;
+    text-align: center;
+    text-shadow: 1px 1px #34363f;
+    padding: 6px;
+    background-color: rgba(153, 153, 153, 0.20);
+    margin: 4px 0;
+    border-radius: 3px;
+    align-items: center;
+    width: 47%
+}
+
+tr > td {
+    margin-right: 4px;
+    text-align: left
+}
+
+tr.admin > td:nth-child(2) {
+    width: 135px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+tr > td:nth-child(3) {
+    display: none
+}
+
+tr.admin > td:nth-child(3) {
+    display: block
+}
+
+tr > td:nth-child(3) {
+    font-size: 0.8em;
+    color: #dedede
+}
+
+tr > td:last-child {
+    flex: 1;
+    text-align: right;
+    font-size: 0.8em;
+    color: #dedede
+}
+
+tr.heading {
+  background-color: #232323
+}
+
+tr.🚓 {
+    order: 101;
+}
+
+tr.🚑 {
+    order: 100;
+}
+
+tr.🚗 {
+    order: 99;
+}
+
+tr.🔧 {
+    order: 98;
+}
+
+tr.🎨 {
+    order: 97;
+}
+
+tr.🚴 {
+    order: 50;
+}
+
+tr.❔ {
+    order: 1;
+}
